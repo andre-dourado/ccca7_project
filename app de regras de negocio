@@ -1,0 +1,14 @@
+aplicações de regras de negócio 
+
+preview: criar um pedido em memória p/ calcular o ttoal, frete e desconto
+checkout: fazer o pedido
+
+entidades sao idependentes (regras de negócio):
+
+Order
+OrderItem
+Item
+Dimension 
+Coupon
+FreightCalculator
+Cpf
