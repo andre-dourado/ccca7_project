@@ -101,3 +101,24 @@ CREATE TABLE ccca.order_item (
 	CONSTRAINT order_item_id_item_fkey FOREIGN KEY (id_item) REFERENCES ccca.item(id_item),
 	CONSTRAINT order_item_id_order_fkey FOREIGN KEY (id_order) REFERENCES ccca."order"(id_order)
 );
+
+INSERT INTO ccca.item (description,price,width,height,length,weight) VALUES
+	 ('Guitarra',1000,100,30,10,3),
+	 ('Amplificador',5000,50,50,50,20),
+	 ('Cabo',30,10,10,10,1);
+
+INSERT INTO ccca."order" (coupon_code,coupon_percentage,code,cpf,issue_date,freight,"sequence",total) VALUES
+	 (NULL,NULL,'202200000001','160.455.710-96','2022-03-01 10:00:00',260,NULL,6350);
+
+INSERT INTO ccca.order_item (id_order,id_item,price,quantity) VALUES
+	 (14,1,1000,1),
+	 (14,2,5000,1),
+	 (14,3,30,3);
+
+INSERT INTO ccca.coupon (code,percentage,expire_date) VALUES
+	 ('VALE20',20,'2022-10-10 10:00:00'),
+	 ('VALE20_EXPIRED',20,'2020-10-10 10:00:00');
+
+INSERT INTO ccca.address (cep,latitude,longitude,id_address) VALUES
+	 ('73320010',-27.5945,-48.5477,1),
+	 ('73320011',-22.9129,-43.2003,2);
