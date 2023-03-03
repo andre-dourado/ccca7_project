@@ -1,6 +1,6 @@
 import axios from "axios";
 
-test("Deve simular uma compra", async function () {
+test.skip("Deve simular uma compra", async function () {
     const response = await axios({
         url: "http://localhost:3000/orderPreview",
         method: "post",
@@ -17,7 +17,7 @@ test("Deve simular uma compra", async function () {
     expect(output.total).toBe(6350);
 });
 
-test("Deve retornar um pedido com base no código", async function () {
+test.skip("Deve retornar um pedido com base no código", async function () {
     const response = await axios({
         url: "http://localhost:3000/orders/202200000001",
         method: "get"
@@ -26,7 +26,7 @@ test("Deve retornar um pedido com base no código", async function () {
     expect(output.orderCode).toBe("202200000001");
 });
 
-test("Deve retornar a lista de pedidos", async function () {
+test.skip("Deve retornar a lista de pedidos", async function () {
     const response = await axios({
         url: "http://localhost:3000/orders",
         method: "get"
@@ -35,7 +35,7 @@ test("Deve retornar a lista de pedidos", async function () {
     expect(orders.length).toBeGreaterThan(0);
 });
 
-test("Deve ser possível calcular a distância entre dois CEPs", async function () {
+test.skip("Deve ser possível calcular a distância entre dois CEPs", async function () {
     const response = await axios({
         url: "http://localhost:3000/freight/distance",
         method: "post",

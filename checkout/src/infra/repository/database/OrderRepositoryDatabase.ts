@@ -35,7 +35,7 @@ export default class OrderRepositoryDatabase implements OrderRepository {
     }
 
     async listOrder(): Promise<Order[]> {
-        const ordersData = await this.connection.query("select * from ccca.order", []);
+        const ordersData = await this.connection.query('select * from ccca.order', []);
         const orders = [];
         for (const orderData of ordersData) {
             const order = new Order(orderData.cpf, new Date(orderData.issue_date), orderData.code.slice(4));
