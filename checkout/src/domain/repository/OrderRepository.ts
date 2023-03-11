@@ -6,4 +6,5 @@ export default interface OrderRepository {
     clean (): Promise<void>;
     getByCode (code: string): Promise<Order>;
     listOrder(): Promise<Order[]>;
+    get(code: string): Promise<Order>;
 }
