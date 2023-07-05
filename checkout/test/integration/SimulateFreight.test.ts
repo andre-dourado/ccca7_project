@@ -7,14 +7,14 @@ import ItemRepositoryDatabase from '../../src/infra/repository/database/ItemRepo
 test("Deve simular o frete", async function () {
     const connection = new PgPromiseAdapter();
     const itemRepository = new ItemRepositoryDatabase(connection);
-    const calculateFreightGateway = new CalculateFreightHttpGateway();
-    // const calculateFreightGateway: CalculateFreightGateway = {
-    //     async calculate(input: Input) {
-    //         return {
-    //             total: 202.09
-    //         }
-    //     }
-    // }
+    // const calculateFreightGateway = new CalculateFreightHttpGateway();
+    const calculateFreightGateway: CalculateFreightGateway = {
+        async calculate(input: Input) {
+            return {
+                total: 202.09
+            }
+        }
+    }
     const simulateFreight = new SimulateFreight(itemRepository, calculateFreightGateway);
     const output = await simulateFreight.execute({
         from : "22060030",
