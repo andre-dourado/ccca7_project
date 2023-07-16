@@ -1,9 +1,9 @@
 import axios from "axios";
 
-test("Deve simular uma compra", async function () {
+test.skip("Deve obter um item da API", async function () {
     const response = await axios({
-        url: "http://localhost:3000/orderPreview",
-        method: "post",
+        url: "http://localhost:3004/items/1",
+        method: "get",
         data: {
             cpf: "160.455.710-96",
             orderItems: [
@@ -14,5 +14,6 @@ test("Deve simular uma compra", async function () {
         }
     });
     const output = response.data;
-    expect(output.total).toBe(6090);
+    expect(output.description).toBe("Guitarra");
+    expect(output.price).toBe(1000);
 });

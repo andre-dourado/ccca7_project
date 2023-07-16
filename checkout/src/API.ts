@@ -1,13 +1,10 @@
-// main
 import OrderController from './infra/controller/http/OrderController';
 import ExpressAdapter from './infra/http/ExpressAdapter';
-import PgPromiseAdapter from './infra/database/PgPromiseAdapter';
-import FreightController from './infra/controller/http/FreightController';
+import GetItemHttpGateway from './infra/gateway/GetItemHttpGateway';
+import PreviewOrder from './application/PreviewOrder';
 
-// Frameworks and Adapters
 const http = new ExpressAdapter();
-const connection = new PgPromiseAdapter();
-// Interface Adapters
-new OrderController(http, connection);
-new FreightController(http, connection);
+const getItemGateway = new GetItemHttpGateway();
+const previewOrder = new PreviewOrder(getItemGateway);
+new OrderController(http, previewOrder);
 http.listen(3000);
