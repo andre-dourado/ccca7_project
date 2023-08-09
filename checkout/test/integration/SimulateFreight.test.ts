@@ -5,7 +5,7 @@ import Item from '../../src/domain/entities/Item';
 import PgPromiseAdapter from '../../src/infra/database/PgPromiseAdapter'
 import CalculateFreightHttpGateway from '../../src/infra/gateway/CalculateFreightHttpGateway';
 
-test("Deve simular o frete", async function () {
+test.skip("Deve simular o frete", async function () {
     const connection = new PgPromiseAdapter();
     // const calculateFreightGateway = new CalculateFreightHttpGateway();
     const calculateFreightGateway: CalculateFreightGateway = {

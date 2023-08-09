@@ -1,11 +1,12 @@
-import OrderRepository from '../domain/repository/OrderRepository';
-import Order from '../domain/entities/Order';
-import CalculateFreightGateway from './gateway/CalculateFreightGateway';
-import DecrementStockGateway from './gateway/DecrementStockGateway';
-import GetItemGateway from './gateway/GetItemGateway';
-import Queue from '../infra/queue/Queue';
-import OrderPlaced from '../domain/event/OrderPlaced';
-export default class Checkout {
+import Order from '../../domain/entities/Order';
+import OrderPlaced from '../../domain/event/OrderPlaced';
+import OrderRepository from '../../domain/repository/OrderRepository';
+import Queue from '../../infra/queue/Queue';
+import CalculateFreightGateway from '../gateway/CalculateFreightGateway';
+import DecrementStockGateway from '../gateway/DecrementStockGateway';
+import GetItemGateway from '../gateway/GetItemGateway';
+
+export default class CheckoutHandler {
 
     constructor (
         readonly orderRepository: OrderRepository, 

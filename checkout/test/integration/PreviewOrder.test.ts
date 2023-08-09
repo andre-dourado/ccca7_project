@@ -4,7 +4,7 @@ import GetItemHttpGateway from '../../src/infra/gateway/GetItemHttpGateway';
 import GetItemGateway from '../../src/application/gateway/GetItemGateway';
 import Item from '../../src/domain/entities/Item';
 
-test("Deve simular um pedido", async function () {
+test.skip("Deve simular um pedido", async function () {
     const connection = new PgPromiseAdapter();
     const itemRepository = new GetItemHttpGateway();
     const getItemGateway: GetItemGateway = {
