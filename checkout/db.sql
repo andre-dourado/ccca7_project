@@ -74,6 +74,7 @@ CREATE TABLE ccca.item (
 
 CREATE TABLE ccca."order" (
 	id_order serial4 NOT NULL,
+	guid text,
 	coupon_code text NULL,
 	coupon_percentage numeric NULL,
 	code text NULL,
@@ -102,6 +103,11 @@ CREATE TABLE ccca.order_item (
 	CONSTRAINT order_item_id_order_fkey FOREIGN KEY (id_order) REFERENCES ccca."order"(id_order)
 );
 
+create table ccca.order_projection (
+	guid text,
+	data jsonb not null default '{}'
+);
+
 INSERT INTO ccca.item (description,price,width,height,length,weight) VALUES
 	 ('Guitarra',1000,100,30,10,3),
 	 ('Amplificador',5000,50,50,50,20),
@@ -111,9 +117,9 @@ INSERT INTO ccca."order" (coupon_code,coupon_percentage,code,cpf,issue_date,frei
 	 (NULL,NULL,'202200000001','160.455.710-96','2022-03-01 10:00:00',260,NULL,6350);
 
 INSERT INTO ccca.order_item (id_order,id_item,price,quantity) VALUES
-	 (14,1,1000,1),
-	 (14,2,5000,1),
-	 (14,3,30,3);
+	 (1,1,1000,1),
+	 (1,2,5000,1),
+	 (1,3,30,3);
 
 INSERT INTO ccca.coupon (code,percentage,expire_date) VALUES
 	 ('VALE20',20,'2022-10-10 10:00:00'),

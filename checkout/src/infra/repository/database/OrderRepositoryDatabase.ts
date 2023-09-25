@@ -11,8 +11,8 @@ export default class OrderRepositoryDatabase implements OrderRepository {
     
     async save(order: Order): Promise<void> {
         const [orderData] = await this.connection.query(`insert into ccca.order 
-            (code, cpf, issue_date, total, freight) values ($1, $2, $3, $4, $5) returning *`, 
-            [order.getCode(), order.cpf.getValue(), order.date, order.getTotal(), order.freight]);
+            (code, cpf, issue_date, total, freight, guid) values ($1, $2, $3, $4, $5, $6) returning *`, 
+            [order.getCode(), order.cpf.getValue(), order.date, order.getTotal(), order.freight, order.guid]);
         for (const orderItem of order.orderItems) {
             await this.connection.query(`insert into ccca.order_item (id_order,
                 id_item, price, quantity) values ($1, $2, $3, $4)`, [orderData.id_order,
@@ -37,6 +37,12 @@ export default class OrderRepositoryDatabase implements OrderRepository {
         order.coupon = new OrderCoupon(orderData.code, orderData.coupon_percentage) //add param in bd
         order.freight = parseFloat(orderData.freight);
         return order;
+    }
+
+    async getByGuid(guid: string): Promise<Order> {
+        const [orderData] = await this.connection.query("select code from ccca.order where guid = $1", [guid]);
+        if (!orderData) throw new Error("Order not found");
+        return this.get(orderData.code);
     }
 
     async clean(): Promise<void> {

@@ -16,9 +16,10 @@ export default class CheckoutHandler {
         readonly queue: Queue) {
     }
 
-    async execute (input: Input): Promise<Output> {
+    async execute (input: Input): Promise<void> {
         const sequence = await this.orderRepository.count() + 1;
         const order = new Order(input.cpf, input.date, sequence);
+        order.guid = input.guid;
         const orderItemsFreight = [];
         const orderItemsStock = [];
         for (const orderItem of input.orderItems) {
@@ -32,11 +33,6 @@ export default class CheckoutHandler {
         await this.orderRepository.save(order);
         // await this.decrementStockGateway.decrement(orderItemsStock)
         await this.queue.publish(new OrderPlaced(order.getCode(), orderItemsStock));
-        const total = order.getTotal();
-        return {
-            code: order.getCode(),
-            total,
-        }
     }
 }
 
@@ -45,6 +41,7 @@ type Input = {
     to: string,
     cpf: string,
     date: Date,
+    guid?: string,
     orderItems: { idItem: number, quantity: number }[]
 }
 

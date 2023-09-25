@@ -9,6 +9,7 @@ export default class Order {
     cpf: Cpf;
     orderItems: OrderItem[];
     coupon?: OrderCoupon;
+    guid?: string;
     freight = 0;
     private code: OrderCode;
 

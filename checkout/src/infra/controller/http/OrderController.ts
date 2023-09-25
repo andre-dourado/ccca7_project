@@ -1,7 +1,7 @@
 import Http from '../../http/Http';
 import PreviewOrder from '../../../application/PreviewOrder';
 import Checkout from '../../../application/Checkout';
-import Checkout2 from '../../../application/Checkout2';
+import Checkout2 from '../../../application/Checkout';
 export default class OrderController {
 
     constructor (readonly http: Http, readonly previewOrder: PreviewOrder, readonly checkout: Checkout2) {
